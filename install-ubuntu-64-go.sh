@@ -23,10 +23,10 @@ sudo sed -i '$a\dtoverlay=dwc2,dr_mode=host' /boot/firmware/config.txt
 
 # install PWM fan control daemon.
 log_action_msg "DeskPi main control service loaded."
-cd $installationfolder/drivers/c/ 
-mv $installationfolder/drivers/c/pwmFanControl $installationfolder/drivers/c/pwmFanControl.old
-gcc -o $installationfolder/drivers/c/pwmFanControl $installationfolder/drivers/c/pwmControlFan.c
-sudo cp -rf $installationfolder/drivers/c/pwmFanControl /usr/bin/pwmFanControl
+#cd $installationfolder/drivers/go/pwmFanControl 
+#mv $installationfolder/drivers/go/pwmFanControl/pwmFanControl $installationfolder/drivers/go/pwmFanControl/pwmFanControl.old
+#go build .
+sudo cp -rf $installationfolder/drivers/go/pwmFanControl/pwmFanControl /usr/bin/pwmFanControl
 sudo cp -rf $installationfolder/drivers/c/fanStop  /usr/bin/fanStop
 sudo cp -rf $installationfolder/deskpi-config  /usr/bin/deskpi-config
 sudo cp -rf $installationfolder/Deskpi-uninstall  /usr/bin/Deskpi-uninstall
@@ -42,7 +42,7 @@ echo "After=multi-user.target" >> $deskpidaemon
 echo "[Service]" >> $deskpidaemon
 echo "Type=simple" >> $deskpidaemon
 echo "RemainAfterExit=no" >> $deskpidaemon
-echo "ExecStart=sudo /usr/bin/pwmFanControl &" >> $deskpidaemon
+echo "ExecStart=sudo /usr/bin/pwmFanControl" >> $deskpidaemon
 echo "[Install]" >> $deskpidaemon
 echo "WantedBy=multi-user.target" >> $deskpidaemon
 
